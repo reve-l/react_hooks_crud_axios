@@ -1,10 +1,11 @@
 //import logo from './logo.svg';
 //import './App.css';
 import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import AddTuto from "./composants/AddTuto";
-import Tuto from "./composants/Tuto";
+import AddTuto from "./composants/AddTuto2";
+import Tuto from "./composants/Tuto2";
 //import TutorialsList from "./composants/TutorialsList";
 
 
