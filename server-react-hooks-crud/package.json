@@ -1,0 +1,19 @@
+{
+  "name": "server-r-h-crud",
+  "version": "1.0.0",
+  "description": "serveur pour le client du projet react_hooks_crud_axios",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reve-l/react_hooks_crud_axios.git"
+  },
+  "author": "Revel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reve-l/react_hooks_crud_axios/issues"
+  },
+  "homepage": "https://github.com/reve-l/react_hooks_crud_axios#readme"
+}
