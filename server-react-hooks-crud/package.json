@@ -1,0 +1,27 @@
+{
+  "name": "server-r-h-crud",
+  "version": "1.0.0",
+  "description": "serveur pour le client du projet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Revel",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reve-l/react_hooks_crud_axios.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "sequelize",
+    "mysql",
+    "rest",
+    "api"
+  ],
+  "bugs": {
+    "url": "https://github.com/reve-l/react_hooks_crud_axios/issues"
+  },
+  "homepage": "https://github.com/reve-l/react_hooks_crud_axios#readme"
+}
