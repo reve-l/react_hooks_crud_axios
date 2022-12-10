@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-//import './App.css';
+import './App.css';
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
