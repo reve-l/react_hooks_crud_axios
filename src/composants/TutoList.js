@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TutorialDataService from "../services/TutorialService";
+import TutorialService from "../Services/TutoServices";
 import { Link } from "react-router-dom";
 
 const TutoList = () => {
@@ -18,7 +18,7 @@ const TutoList = () => {
   };
 
   const retrieveTutorials = () => {
-    TutorialDataService.getAll()
+    TutorialService.getAll()
       .then(response => {
         setTutorials(response.data);
         console.log(response.data);
@@ -40,7 +40,7 @@ const TutoList = () => {
   };
 
   const removeAllTutorials = () => {
-    TutorialDataService.removeAll()
+    TutorialService.removeAll()
       .then(response => {
         console.log(response.data);
         refreshList();
@@ -51,7 +51,7 @@ const TutoList = () => {
   };
 
   const findByTitle = () => {
-    TutorialDataService.findByTitle(searchTitle)
+    TutorialService.findByTitle(searchTitle)
       .then(response => {
         setTutorials(response.data);
         console.log(response.data);

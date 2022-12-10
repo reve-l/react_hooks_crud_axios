@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AddTuto from "./composants/AddTuto2";
 import Tuto from "./composants/Tuto2";
-//import TutorialsList from "./composants/TutorialsList";
+import TutoList from "./composants/TutoList";
 
 
 function App() {
@@ -32,9 +32,9 @@ function App() {
 
     <div className="container mt-3">
       <Routes>
-        {/*<Route path="/" element={<TutorialsList/>} />*/}
-        {/*<Route path="/tutorials" element={<TutorialsList/>} />*/}
-        <Route path="/" element={<AddTuto/>} />
+        {<Route path="/" element={<TutoList/>} />}
+        {<Route path="/tutorials" element={<TutoList/>} />}
+        <Route path="/add" element={<AddTuto/>} />
         <Route path="/tuto/:id" element={<Tuto/>} />
       </Routes>
     </div>
