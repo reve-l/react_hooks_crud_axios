@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import TutorialService from "../Services/TutoServices";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+
 
 const Tuto = props => {
   const { id }= useParams();
@@ -36,7 +40,12 @@ const Tuto = props => {
     setCurrentTutorial({ ...currentTutorial, [name]: value });
   };
 
+  
+  
+  
+  /*FONCTION DE PUBLICATION D'UN ARTICLE */
   const updatePublished = status => {
+
     var data = {
       id: currentTutorial.id,
       title: currentTutorial.title,
@@ -44,37 +53,111 @@ const Tuto = props => {
       published: status
     };
 
-    TutorialService.update(currentTutorial.id, data)
-      .then(response => {
-        setCurrentTutorial({ ...currentTutorial, published: status });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    Swal.fire({
+      title: status===1?'Publier ce Tutoriel':'Dépublier',
+      icon:'question',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: status===1?'Publier':'Dépublier',
+      denyButtonText: `Annuler`,
+    })
+    
+    .then((result) => {
+      
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        TutorialService.update(currentTutorial.id, data)
+        .then(response => {
+          setCurrentTutorial({ ...currentTutorial, published: status });
+          status===1?
+          Swal.fire('Publié!', '', 'success'):Swal.fire('Dépublié!', '', 'success');
+          navigate("/tutorials");
+          //console.log(response.data);
+          //setMessage("The tutorial was updated successfully!");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      } else if (result.isDenied) {
+        //navigate("/tutorials");
+        navigate("/tuto/" + currentTutorial.id);
+        //Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+
   };
 
+
+
+  /*FONCTION DE MODIFICATION D'UN TUTO*/
   const updateTutorial = () => {
-    TutorialService.update(currentTutorial.id, currentTutorial)
-      .then(response => {
-        console.log(response.data);
-        setMessage("The tutorial was updated successfully!");
-      })
-      .catch(e => {
-        console.log(e);
-      });
+
+    Swal.fire({
+      title: 'Modifier ce Tutoriel',
+      icon:'question',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Modifier',
+      denyButtonText: `Annuler`,
+    }).then((result) => {
+
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        TutorialService.update(currentTutorial.id, currentTutorial)
+        .then(response => {
+          //Swal.fire('Modifié!', '', 'success')
+          navigate("/tutorials");
+          //console.log(response.data);
+          //setMessage("The tutorial was updated successfully!");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      } else if (result.isDenied) {
+        //navigate("/tutorials");
+        navigate("/tuto/" + currentTutorial.id);
+        //Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+
   };
 
+
+
+
+  /*FONCTION DE SUPPRESION D'UN TUTORIEL*/
   const deleteTutorial = () => {
-    TutorialService.remove(currentTutorial.id)
-      .then(response => {
-        console.log(response.data);
-        navigate("/tutorials");
+
+    Swal.fire({
+      title: 'Supprimer ce Tutoriel',
+      icon:'question',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Supprimer',
+      denyButtonText: `Annuler`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+
+        TutorialService.remove(currentTutorial.id)
+          .then(response => {
+            //Swal.fire('Supprimé!', '', 'success')
+          navigate("/tutorials");
+          
       })
       .catch(e => {
         console.log(e);
       });
+      } else if (result.isDenied) {
+        //navigate("/tutorials");
+        navigate("/tuto/" + currentTutorial.id);
+        //Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+
   };
+
+
 
   return (
     <div>
@@ -93,7 +176,7 @@ const Tuto = props => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group mt-2">
             <label htmlFor="description">Description</label>
             <input
               type="text"
@@ -105,7 +188,7 @@ const Tuto = props => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group mt-2">
             <label>
               <strong>Status:</strong>
             </label>
@@ -115,27 +198,27 @@ const Tuto = props => {
 
         {currentTutorial.published ? (
           <button
-            className="badge badge-primary mr-2"
-            onClick={() => updatePublished(false)}
+            className="m-3 btn btn-sm btn-primary"
+            onClick={() => updatePublished(0)}
           >
             UnPublish
           </button>
         ) : (
           <button
-            className="badge badge-primary mr-2"
-            onClick={() => updatePublished(true)}
+            className="m-3 btn btn-sm btn-primary"
+            onClick={() => updatePublished(1)}
           >
             Publish
           </button>
         )}
 
-        <button className="badge badge-danger mr-2" onClick={deleteTutorial}>
+        <button className="m-3 btn btn-sm btn-danger" onClick={deleteTutorial}>
           Delete
         </button>
 
         <button
           type="submit"
-          className="badge badge-success"
+          className="m-3 btn btn-sm btn-success"
           onClick={updateTutorial}
         >
           Update

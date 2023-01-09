@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import TutorialService from "../Services/TutoServices";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { useParams, useNavigate } from 'react-router-dom';
-//import Moment from 'moment';
-//import dayjs from "dayjs";
-import { CiSearch } from 'react-icons/ci'
 
 const TutoList = () => {
   const [tutorials, setTutorials] = useState([]);
   const [currentTutorial, setCurrentTutorial] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [trouve, setTrouve] = useState(false);
+  const [searchTitle, setSearchTitle] = useState("");
 
   let navigate = useNavigate();
 
@@ -20,12 +17,19 @@ const TutoList = () => {
     retrieveTutorials();
   }, []);
 
-//console.log("test filtre: ",tutorials.filter(tuto=>tuto.title.toLowerCase().includes('t')))
+  const onChangeSearchTitle = e => {
+    const searchTitle = e.target.value;
+    setSearchTitle(searchTitle);
+    findByTitle();
+    //console.log(searchTitle);
+  };
 
   const retrieveTutorials = () => {
     TutorialService.getAll()
       .then(response => {
         setTutorials(response.data);
+        //console.log("AFFICHEAGE:")
+        //console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -45,7 +49,9 @@ const TutoList = () => {
 
   const removeAllTutorials = () => {
 
-   Swal.fire({
+
+
+    Swal.fire({
       title: 'Attention vider tous les Tutoriels',
       icon:'question',
       showDenyButton: true,
@@ -77,38 +83,50 @@ const TutoList = () => {
   
   
   
-
+  
+  /*FONCTION DE RECHERCHE PAR LE TITRE*/
+  const findByTitle = () => {
+    TutorialService.findByTitle(searchTitle)
+      .then(response => {
+        setTutorials(response.data);
+        //console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
 
   return (
 
   <div className="list row">
-    <div className="col-md-4"></div>
     <div className="col-md-8">
-      <div className="mb-3  search-txt">
+      <div className="input-group mb-3">
         <input
           type="text"
-          className=""
-          placeholder="Recherchez par le titre"
-          value={searchQuery}
-          onChange={ (e) => setSearchQuery(e.target.value) }
+          className="form-control"
+          placeholder="Search by title"
+          value={searchTitle}
+          onChange={onChangeSearchTitle}
         />
-        <CiSearch className="r-icon"/>
+        <div className="input-group-append">
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            onClick={findByTitle}
+          >
+            Search
+          </button>
+        </div>
       </div>
     </div>
-    
+    <div className="col-md-6">
 
-    <div className="col-md-4"></div>
-
-    <div className="col-md-5">    
+      
             <h4>Tutorials List</h4>
 
             <ul className="list-group">
-              {/*console.log("formul",tutorials)*/}
-              {/*setTrouve(tutorials.filter(tuto=>tuto.title.toLowerCase().includes(searchQuery)))*/}
               {tutorials &&
-                
-                tutorials.filter(tuto=>tuto.title.toLowerCase().includes(searchQuery))
-                .map((tutorial, index) => (
+                tutorials.map((tutorial, index) => (
                   <li
                     className={
                       "list-group-item " + (index === currentIndex ? "active" : "")
@@ -120,7 +138,6 @@ const TutoList = () => {
                   </li>
                 ))}
             </ul>
-            {console.log(trouve)}
 
             <button
               className="m-3 btn btn-sm btn-danger"
@@ -130,7 +147,7 @@ const TutoList = () => {
             </button>
     </div>
 
-    <div className="col-md-3">
+    <div className="col-md-6">
       {currentTutorial ? (
         <div>
           <h4>Tutorial</h4>
@@ -150,13 +167,13 @@ const TutoList = () => {
             <label>
               <strong>Date création:</strong>
             </label>{" "}
-            {new Date(currentTutorial.createdAt).toDateString()}
+            {currentTutorial.createdAt}
           </div>
           <div>
             <label>
               <strong>Date modif:</strong>
             </label>{" "}
-            {new Date(currentTutorial.updatedAt).toDateString()}
+            {currentTutorial.updatedAt}
           </div>
           <div>
             <label>
@@ -167,7 +184,7 @@ const TutoList = () => {
 
           <Link
             to={"/tuto/" + currentTutorial.id}
-            className="m-3 btn btn-sm btn-warning"
+            className="edit-btn"
           >
             Edit
             <i class="fas fa-edit"></i>

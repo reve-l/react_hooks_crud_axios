@@ -1,41 +1,38 @@
-import http from "../http-common";
+import HTTP from "../http-common";
+import axios from "axios";
 
-const getAll = () => {
-  return http.get("/tutorials");
+
+class TutorialService{
+getAll(){
+  return HTTP.get("/Tutorials");
+  //return axios.get("http://localhost:8080/api/Tutorials")  
+    //"http://localhost:8080/api/Tutorials"    
 };
 
-const get = id => {
-  return http.get(`/tutorials/${id}`);
+get(id){
+  return HTTP.get(`/Tutorials/${id}`);
 };
 
-const create = data => {
-  return http.post("/tutorials", data);
+create(data){
+  return HTTP.post("/Tutorials", data);
 };
 
-const update = (id, data) => {
-  return http.put(`/tutorials/${id}`, data);
+update(id, data){
+  return HTTP.put(`/Tutorials/${id}`, data);
 };
 
-const remove = id => {
-  return http.delete(`/tutorials/${id}`);
+remove(id){
+  return HTTP.delete(`/Tutorials/${id}`);
 };
 
-const removeAll = () => {
-  return http.delete(`/tutorials`);
+removeAll(){
+  return HTTP.delete(`/Tutorials`);
 };
 
-const findByTitle = title => {
-  return http.get(`/tutorials?title=${title}`);
+findByTitle(title){
+  return HTTP.get(`/Searcht?title=${title}`);
 };
 
-const TutorialService = {
-  getAll,
-  get,
-  create,
-  update,
-  remove,
-  removeAll,
-  findByTitle
-};
+}
 
-export default TutorialService;
+export default new TutorialService();

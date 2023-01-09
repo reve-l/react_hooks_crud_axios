@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import TutorialService from "../Services/TutoServices";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { useNavigate } from 'react-router-dom';
+
 
 const AddTuto = () => {
   const initialTutorialState = {
@@ -10,6 +14,8 @@ const AddTuto = () => {
   };
   const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
+
+  let navigate = useNavigate();
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -30,8 +36,16 @@ const AddTuto = () => {
           description: response.data.description,
           published: response.data.published
         });
-        setSubmitted(true);
-        console.log(response.data);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Enregistré',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+        navigate("/tutorials");
+        //setSubmitted(true);
+        //console.log(response.data);
+
       })
       .catch(e => {
         console.log(e);
@@ -48,7 +62,7 @@ const AddTuto = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newTutorial}>
+          <button className="btn btn-success m-3" onClick={newTutorial}>
             Add
           </button>
         </div>
@@ -80,7 +94,7 @@ const AddTuto = () => {
             />
           </div>
 
-          <button onClick={saveTutorial} className="btn btn-success">
+          <button onClick={saveTutorial} className="btn btn-success m-3">
             Submit
           </button>
         </div>
