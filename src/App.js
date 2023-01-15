@@ -4,21 +4,23 @@ import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import AddTuto from "./composants/AddTuto2";
-import Tuto from "./composants/Tuto2";
+import AddTuto from "./composants/AddTuto";
+import Tuto from "./composants/TutoModif";
 import TutoList from "./composants/TutoList";
+import TutoListTable from "./composants/TutoListTable";
+import TutoDetails from "./composants/TutoDetails";
 
 
 function App() {
   return (
     <div>
     <nav className="navbar navbar-expand navbar-dark bg-dark">
-      <a href="/tutorials" className="navbar-brand">
+      <a href="/" className="navbar-brand">
         Koder
       </a>
       <div className="navbar-nav mr-auto">
         <li className="nav-item">
-          <Link to={"/tutorials"} className="nav-link">
+          <Link to={"/tutorialslist"} className="nav-link">
             Tutorials
           </Link>
         </li>
@@ -33,9 +35,10 @@ function App() {
     <div className="container mt-3">
       <Routes>
         {<Route path="/" element={<TutoList/>} />}
-        {<Route path="/tutorials" element={<TutoList/>} />}
+        {<Route path="/tutorialslist" element={<TutoListTable/>} />}
         <Route path="/add" element={<AddTuto/>} />
         <Route path="/tuto/:id" element={<Tuto/>} />
+        <Route path="/details/:id" element={<TutoDetails/>} />
       </Routes>
     </div>
   </div>

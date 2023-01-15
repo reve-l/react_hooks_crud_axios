@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import {Link, useParams, useNavigate } from 'react-router-dom';
 import TutorialService from "../Services/TutoServices";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import {BsReplyAllFill} from 'react-icons/bs';
+
 
 
 
@@ -71,7 +73,7 @@ const Tuto = props => {
           setCurrentTutorial({ ...currentTutorial, published: status });
           status===1?
           Swal.fire('Publié!', '', 'success'):Swal.fire('Dépublié!', '', 'success');
-          navigate("/tutorials");
+          navigate("/tutorialslist");
           //console.log(response.data);
           //setMessage("The tutorial was updated successfully!");
         })
@@ -106,7 +108,7 @@ const Tuto = props => {
         TutorialService.update(currentTutorial.id, currentTutorial)
         .then(response => {
           //Swal.fire('Modifié!', '', 'success')
-          navigate("/tutorials");
+          navigate("/tutorialslist");
           //console.log(response.data);
           //setMessage("The tutorial was updated successfully!");
         })
@@ -223,6 +225,8 @@ const Tuto = props => {
         >
           Update
         </button>
+        {<Link to={"/tutorialslist"} className="btn btn-sm" ><BsReplyAllFill className="btn-back"/> Quitter</Link>}
+
         <p>{message}</p>
       </div>
     ) : (
@@ -231,6 +235,7 @@ const Tuto = props => {
         <p>Please click on a Tutorial...</p>
       </div>
     )}
+
   </div>
   );
 };

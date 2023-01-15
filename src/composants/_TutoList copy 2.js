@@ -19,38 +19,24 @@ const TutoList = () => {
     retrieveTutorials();
   }, []);
 
-  const onChangeSearchTitle = e => {
-    const searchTitl = e.target.value;
-    setSearchTitle(searchTitl);
-    //retrieveTutorials();
-//console.log("test",e.target.value);
-    
+  const handleSearch = e => {  
     if(e.target.value = ''){
       setTutorials(searchTutorials);
       //console.log("FILTRE3:",searchTutorials);
       //console.log("test e.target.value vide",e.target.value);
     }
     else{
-      console.log("test e.target.value NON vide:",searchTitle);
-
-        //console.log(searchTutorials);
-        const filterResult = searchTutorials.filter((item)=> {
-          //console.log("FILTRE3 includes:",item.title);
-         // console.log("FILTRE3 target:",searchTitle);
-
-          return item.title.toLowerCase().includes(searchTitle.toLowerCase());
-          //console.log("FILTRE3 includes:",item.title.toLowerCase().includes(e.target.value.toLowerCase()));
-        }
+          const filterResult = searchTutorials.filter((item)=> 
+          item.title.toLowerCase().includes(e.target.value.toLowerCase()) 
         )
-        //console.log("FILTRE1 searchTutorials:",searchTutorials);
-        //console.log("FILTRE2 filterResult:",filterResult);
-       
 
-        
-        setTutorials(filterResult);
-      }
+        if(filterResult>0){
+          setTutorials(filterResult);
+        }
+        else{setTutorials([{"title":"no data"}])
+    }
 
-      //setSearchTitle(e.target.value);
+    }
   };
 
 
@@ -141,7 +127,7 @@ const TutoList = () => {
           className="form-control"
           placeholder="Search by title"
           value={searchTitle}
-          onChange={onChangeSearchTitle}
+          onChange={handleSearch}
         />
         <div className="input-group-append">
           <button

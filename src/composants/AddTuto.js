@@ -42,7 +42,7 @@ const AddTuto = () => {
           icon: 'success',
           confirmButtonText: 'OK'
         })
-        navigate("/tutorials");
+        navigate("/tutorialslist");
         //setSubmitted(true);
         //console.log(response.data);
 
@@ -68,8 +68,9 @@ const AddTuto = () => {
         </div>
       ) : (
         <div>
+          <h3>Nouveau Tuto</h3>
           <div className="form-group">
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title" className="mt-3">Title</label>
             <input
               type="text"
               className="form-control"
@@ -82,7 +83,7 @@ const AddTuto = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Description</label>
+            <label htmlFor="description" className="mt-3">Description</label>
             <input
               type="text"
               className="form-control"
