@@ -33,6 +33,27 @@ findByTitle(title){
   return HTTP.get(`/Searcht?title=${title}`);
 };
 
+
+upload = (file, onUploadProgress) => {
+  let formData = new FormData();
+
+  formData.append("file", file);
+
+  return HTTP.post("/upload", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    onUploadProgress,
+  });
+};
+
+getFiles = () => {
+  return HTTP.get("/files");
+};
+
+
+
+
 }
 
 export default new TutorialService();
