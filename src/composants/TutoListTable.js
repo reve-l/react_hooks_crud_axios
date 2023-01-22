@@ -58,13 +58,15 @@ const setActiveTutorial = (tutorial, index) => {
 
 /*FONCTION DE RECHERCHE */
 const search = (data)=>{
-
+//console.log('VOIR:',data);
     return data
     .sort((a,b) => (new Date(a.createdAt).toLocaleDateString())<(new Date(b.createdAt).toLocaleDateString()) ? 1:-1)
     .filter(tuto=>
       tuto.title.toLowerCase().includes(searchQuery.toLowerCase())||
+      tuto.nbpage==(Number(searchQuery))||
+      tuto.auteur.toLowerCase().includes(searchQuery.toLowerCase())||
       tuto.description.toLowerCase().includes(searchQuery.toLowerCase())||
-      new Date(tuto.createdAt).toLocaleDateString().includes(searchQuery)
+      new Date(tuto.dateEdit).toLocaleDateString().includes(searchQuery)
       )
     
     /*data.filter(tuto=>

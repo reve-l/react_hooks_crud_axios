@@ -15,9 +15,13 @@ const Tuto = props => {
   const initialTutorialState = {
     id: null,
     title: "",
+    nbpage:"",
     description: "",
-    published: false
+    auteur:"",
+    published: false,
+    dateEdit:""
   };
+
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
   const [message, setMessage] = useState("");
 
@@ -51,8 +55,11 @@ const Tuto = props => {
     var data = {
       id: currentTutorial.id,
       title: currentTutorial.title,
+      nbpage: currentTutorial.nbpage,
       description: currentTutorial.description,
-      published: status
+      auteur: currentTutorial.auteur,
+      published: status,
+      dateEdit: currentTutorial.dateEdit,
     };
 
     Swal.fire({
@@ -105,11 +112,12 @@ const Tuto = props => {
 
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        console.log(currentTutorial);
         TutorialService.update(currentTutorial.id, currentTutorial)
         .then(response => {
           //Swal.fire('Modifié!', '', 'success')
           navigate("/tutorialslist");
-          //console.log(response.data);
+          console.log(response.data);
           //setMessage("The tutorial was updated successfully!");
         })
         .catch(e => {
@@ -177,6 +185,35 @@ const Tuto = props => {
               value={currentTutorial.title}
               onChange={handleInputChange}
             />
+
+<div className="form-group">
+            <label htmlFor="auteur" className="mt-3">Auteur</label>
+            <input
+              type="text"
+              className="form-control"
+              id="auteur"
+              required
+              value={currentTutorial.auteur}
+              onChange={handleInputChange}
+              name="auteur"
+            />
+          </div>
+
+
+          <div className="form-group">
+            <label htmlFor="nbpage" className="mt-3">Nombre de page</label>
+            <input
+              type="text"
+              className="form-control"
+              id="nbpage"
+              required
+              value={currentTutorial.nbpage}
+              onChange={handleInputChange}
+              name="nbpage"
+            />
+          </div>
+
+
           </div>
           <div className="form-group mt-2">
             <label htmlFor="description">Description</label>
@@ -190,7 +227,21 @@ const Tuto = props => {
             />
           </div>
 
-          <div className="form-group mt-2">
+          <div className="form-group">
+            <label htmlFor="datedit" className="mt-3">Date édition</label>
+            <input
+              type="date"
+              className="form-control"
+              id="datedit"
+              required
+              //value={currentTutorial.dateEdit}
+              onChange={handleInputChange}
+              name="datedit"
+            />
+            {new Date(currentTutorial.dateEdit).toLocaleDateString()}
+          </div>
+
+          <div className="form-group mt-3">
             <label>
               <strong>Status:</strong>
             </label>

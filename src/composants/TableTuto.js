@@ -102,9 +102,10 @@ const deleteTutorial = (id,t) => {
               <tr className="tbl-h">
                 <td>N°</td>
                 <td>Titre</td>
+                <td>Pages</td>
                 <td>Description</td>
-                <td>Date création</td>
-                <td>Date à jour</td>
+                <td>Auteur</td>
+                <td>Parution</td>
                 <td>Etat</td>
                 <td>Action</td>
               </tr>
@@ -123,14 +124,21 @@ const deleteTutorial = (id,t) => {
                   <tr>
                     <td>{index+1}</td>
                     <td>{tutorial.title}</td>
+                    <td>{tutorial.nbpage}</td>
                     <td>{tutorial.description}</td>
-                    <td>{new Date(tutorial.createdAt).toLocaleDateString()}</td>
-                    <td>{tutorial.updatedAt?new Date(tutorial.updatedAt).toLocaleDateString():"-"}</td>
+                    <td>
+                      {tutorial.auteur}
+                      {/*new Date(tutorial.createdAt).toLocaleDateString()*/}
+                      </td>
+                    <td>
+                      {tutorial.dateEdit?new Date(tutorial.dateEdit).toLocaleDateString():"-"}
+                      {/*tutorial.updatedAt?new Date(tutorial.updatedAt).toLocaleDateString():"-"*/}
+                      </td>
                     <td>{tutorial.published?"Publié":"Non"}</td>
                     <td>
-                      <Link to={"/tuto/" + tutorial.id} className="btn btn-sm" ><CiPickerHalf className="btn-edit"/></Link>
-                      <Link to={"/details/" + tutorial.id} className="btn btn-sm" ><CiViewList className="btn-dtls"/></Link>
-                      <button onClick={() => deleteTutorial(tutorial.id,tutorial)} className="btn btn-sm" ><BsFillTrashFill className="btn-del"/></button>
+                      <Link to={"/tuto/" + tutorial.id} className="btn btn-sm" title="modifier"><CiPickerHalf className="btn-edit"/></Link>
+                      <Link to={"/details/" + tutorial.id} className="btn btn-sm" title="détails"><CiViewList className="btn-dtls"/></Link>
+                      <button onClick={() => deleteTutorial(tutorial.id,tutorial)} className="btn btn-sm" title="supprimer"><BsFillTrashFill className="btn-del"/></button>
 
                     </td>
                   </tr>

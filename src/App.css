@@ -235,3 +235,21 @@
   font-weight: bold;
 
 }
+
+
+/*GESTION D'UNE IMAGE*/
+.p-image{
+  width: 50vw;
+  height: 50vh;
+  background-color: rgba(83, 92, 104,0.5);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7%;
+  padding: 2rem;
+}
+.p-image img{
+  max-width: 50%;
+}

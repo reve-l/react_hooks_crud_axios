@@ -9,11 +9,8 @@ const AddTuto = () => {
   const initialTutorialState = {
     id: null,
     title: "",
-    nbpage:"",
     description: "",
-    auteur:"",
-    published: false,
-    dateEdit:""
+    published: false
   };
   const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
@@ -28,11 +25,9 @@ const AddTuto = () => {
   const saveTutorial = () => {
     var data = {
       title: tutorial.title,
-      nbpage: tutorial.nbpage,
-      description: tutorial.description,
-      auteur: tutorial.auteur,
-      dateEdit: tutorial.dateEdit,
+      description: tutorial.description
     };
+
     TutorialService.create(data)
       .then(response => {
         setTutorial({
@@ -50,8 +45,6 @@ const AddTuto = () => {
         navigate("/tutorialslist");
         //setSubmitted(true);
         //console.log(response.data);
-        console.log("CREATE: ",data);
-
 
       })
       .catch(e => {
@@ -89,34 +82,6 @@ const AddTuto = () => {
             />
           </div>
 
-
-          <div className="form-group">
-            <label htmlFor="auteur" className="mt-3">Auteur</label>
-            <input
-              type="text"
-              className="form-control"
-              id="auteur"
-              required
-              value={tutorial.auteur}
-              onChange={handleInputChange}
-              name="auteur"
-            />
-          </div>
-
-
-          <div className="form-group">
-            <label htmlFor="nbpage" className="mt-3">Nombre de page</label>
-            <input
-              type="text"
-              className="form-control"
-              id="nbpage"
-              required
-              value={tutorial.nbpage}
-              onChange={handleInputChange}
-              name="nbpage"
-            />
-          </div>
-
           <div className="form-group">
             <label htmlFor="description" className="mt-3">Description</label>
             <input
@@ -127,19 +92,6 @@ const AddTuto = () => {
               value={tutorial.description}
               onChange={handleInputChange}
               name="description"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="datedit" className="mt-3">Date édition</label>
-            <input
-              type="date"
-              className="form-control"
-              id="datedit"
-              required
-              value={tutorial.dateEdit}
-              onChange={handleInputChange}
-              name="datedit"
             />
           </div>
 

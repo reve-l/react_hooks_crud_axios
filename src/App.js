@@ -9,6 +9,8 @@ import Tuto from "./composants/TutoModif";
 import TutoList from "./composants/TutoList";
 import TutoListTable from "./composants/TutoListTable";
 import TutoDetails from "./composants/TutoDetails";
+import ImageUpload from './composants/ImageUpload';
+import ImageUploadMultiple from './composants/ImageUploadMultiple';
 
 
 function App() {
@@ -29,6 +31,16 @@ function App() {
             Add
           </Link>
         </li>
+        <li className="nav-item">
+          <Link to={"/upload"} className="nav-link">
+            Upload
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to={"/uploadmultiple"} className="nav-link">
+            Upload multiple
+          </Link>
+        </li>
       </div>
     </nav>
 
@@ -39,6 +51,9 @@ function App() {
         <Route path="/add" element={<AddTuto/>} />
         <Route path="/tuto/:id" element={<Tuto/>} />
         <Route path="/details/:id" element={<TutoDetails/>} />
+        <Route path="/upload" element={<ImageUpload/>} />
+        <Route path="/uploadmultiple" element={<ImageUploadMultiple/>} />
+
       </Routes>
     </div>
   </div>
