@@ -23,7 +23,7 @@ const TutoDetails = props => {
     TutorialService.get(id)
       .then(response => {
         setCurrentTutorial(response.data);
-        console.log(response.data);
+        //console.log(response.data);
       })
       .catch(e => {
         console.log(e);

@@ -24,12 +24,14 @@ const Tuto = props => {
 
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
   const [message, setMessage] = useState("");
+  const [fromDate, setFromDate] = useState(new Date())
+
 
   const getTutorial = id => {
     TutorialService.get(id)
       .then(response => {
         setCurrentTutorial(response.data);
-        console.log(response.data);
+        //console.log('IDIDI',response.data.dateEdit);
       })
       .catch(e => {
         console.log(e);
@@ -45,6 +47,10 @@ const Tuto = props => {
     const { name, value } = event.target;
     setCurrentTutorial({ ...currentTutorial, [name]: value });
   };
+  //const handleInputChangeDate = dt => {
+    //const { name, value } = event.target;
+    //setCurrentTutorial({ ...currentTutorial, [dateEdit]: value });
+  //};
 
   
   
@@ -112,12 +118,12 @@ const Tuto = props => {
 
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        console.log(currentTutorial);
+        //console.log(currentTutorial);
         TutorialService.update(currentTutorial.id, currentTutorial)
         .then(response => {
           //Swal.fire('Modifié!', '', 'success')
           navigate("/tutorialslist");
-          console.log(response.data);
+          //console.log(response.data);
           //setMessage("The tutorial was updated successfully!");
         })
         .catch(e => {
@@ -236,12 +242,12 @@ const Tuto = props => {
               required
               //value={currentTutorial.dateEdit}
               onChange={handleInputChange}
-              name="datedit"
+              name="dateEdit"
             />
             {new Date(currentTutorial.dateEdit).toLocaleDateString()}
           </div>
 
-          <div className="form-group mt-3">
+          <div className="form-group mt-3 mb-5">
             <label>
               <strong>Status:</strong>
             </label>

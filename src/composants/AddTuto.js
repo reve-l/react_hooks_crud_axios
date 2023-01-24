@@ -3,6 +3,7 @@ import TutorialService from "../Services/TutoServices";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { useNavigate } from 'react-router-dom';
+import { yupResolver } from "@hookform/resolvers/yup";
 
 
 const AddTuto = () => {
@@ -13,10 +14,11 @@ const AddTuto = () => {
     description: "",
     auteur:"",
     published: false,
-    dateEdit:""
+    dateEdit:new Date()
   };
   const [tutorial, setTutorial] = useState(initialTutorialState);
   const [submitted, setSubmitted] = useState(false);
+ // const [fromDate, setFromDate] = useState(new Date())
 
   let navigate = useNavigate();
 
@@ -31,7 +33,8 @@ const AddTuto = () => {
       nbpage: tutorial.nbpage,
       description: tutorial.description,
       auteur: tutorial.auteur,
-      dateEdit: tutorial.dateEdit,
+      dateEdit: tutorial.dateEdit
+//      dateEdit: fromDate,
     };
     TutorialService.create(data)
       .then(response => {
@@ -50,7 +53,7 @@ const AddTuto = () => {
         navigate("/tutorialslist");
         //setSubmitted(true);
         //console.log(response.data);
-        console.log("CREATE: ",data);
+        //console.log("CREATE: ",data);
 
 
       })
@@ -138,8 +141,8 @@ const AddTuto = () => {
               id="datedit"
               required
               value={tutorial.dateEdit}
-              onChange={handleInputChange}
-              name="datedit"
+              onChange={/*(e)=>setFromDate(e.target.value)*/ handleInputChange}
+              name="dateEdit"
             />
           </div>
 
