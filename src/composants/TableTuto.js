@@ -3,9 +3,9 @@ import TutorialService from "../Services/TutoServices";
 import Swal from 'sweetalert2';
 import { Link,useParams, useNavigate } from 'react-router-dom';
 
-import { CiWarning,CiPickerHalf,CiViewList } from 'react-icons/ci';
+import { CiWarning,CiPickerHalf,CiViewList,CiPrinting } from 'react-icons/ci';
 import {BsFillTrashFill } from 'react-icons/bs';
-
+import {AiFillPrinter} from 'react-icons/ai';
 
 const TableTuto = ({data}) => {
 
@@ -95,6 +95,9 @@ const deleteTutorial = (id,t) => {
                 <td colSpan={3}></td>        
                 <td>
                     <Link className="m-3 btn btn-sm btn-secondary" to={"/add"}>Nouveau</Link> 
+                </td>
+                <td>
+                    <Link className="m-3 btn btn-sm btn-light" to={"/add"}><AiFillPrinter className=""/>IMPRIMER</Link> 
                 </td>
               </tr>
 
