@@ -253,3 +253,23 @@
 .p-image img{
   max-width: 50%;
 }
+
+
+
+
+/*IMPRESSION*/
+.print{
+  height: 100%;
+  width: 100%;
+}
+
+.my-modal{
+  height: 90vh;
+  /*width: 120vh;*/
+  background-color: red;
+}
+.my-modal .modal-body{
+  height: 90vh;
+  width: 100%;
+  background-color:blanchedalmond;
+}

@@ -6,11 +6,31 @@ import { Link,useParams, useNavigate } from 'react-router-dom';
 import { CiWarning,CiPickerHalf,CiViewList,CiPrinting } from 'react-icons/ci';
 import {BsFillTrashFill } from 'react-icons/bs';
 import {AiFillPrinter} from 'react-icons/ai';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+
+
+
+
+
 
 const TableTuto = ({data}) => {
 
 
   let navigate = useNavigate();
+
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  }
+  
+  const handleShow = () => {
+    setShow(true);      
+  }
+
+
 
 /*FONCTION DE SUPPRESION DE TOUS LES TUTORIELS*/
 const removeAllTutorials = () => {
@@ -78,6 +98,9 @@ const deleteTutorial = (id,t) => {
 
 };
 
+const print  = () =>{
+
+}
 
 
 
@@ -97,7 +120,7 @@ const deleteTutorial = (id,t) => {
                     <Link className="m-3 btn btn-sm btn-secondary" to={"/add"}>Nouveau</Link> 
                 </td>
                 <td>
-                    <Link className="m-3 btn btn-sm btn-light" to={"/add"}><AiFillPrinter className=""/>IMPRIMER</Link> 
+                    <Link className="m-3 btn btn-sm btn-light" onClick={handleShow}><AiFillPrinter className=""/>IMPRIMER</Link> 
                 </td>
               </tr>
 
@@ -153,6 +176,64 @@ const deleteTutorial = (id,t) => {
         
         
       </table>
+
+
+
+
+
+
+
+
+
+
+      <Modal 
+            show={show}
+             onHide={handleClose}
+             backdrop="static"
+            keyboard={true}
+            size="xl"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            //fullscreen={true}
+            dialogClassName="my-modal"
+      >
+     
+        <Modal.Header closeButton>
+           {/*<Modal.Title>Modal heading</Modal.Title> */}
+        </Modal.Header>
+     
+
+
+        <Modal.Body>
+          <iframe src="http://localhost:8080/api/pdf" frameborder="1" className="print"></iframe>
+        </Modal.Body>
+        {
+          /*
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+           */
+        }
+
+      </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
   </div>

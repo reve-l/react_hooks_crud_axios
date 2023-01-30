@@ -11,6 +11,7 @@ import TutoListTable from "./composants/TutoListTable";
 import TutoDetails from "./composants/TutoDetails";
 import ImageUpload from './composants/ImageUpload';
 import ImageUploadMultiple from './composants/ImageUploadMultiple';
+import Print from './composants/Print';
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
         <Route path="/details/:id" element={<TutoDetails/>} />
         <Route path="/upload" element={<ImageUpload/>} />
         <Route path="/uploadmultiple" element={<ImageUploadMultiple/>} />
+        <Route path="/pdf" element={<Print/>} />
 
       </Routes>
     </div>

@@ -1,4 +1,6 @@
 import HTTP from "../http-common";
+import HTTP2 from "../http-common2";
+
 import axios from "axios";
 
 
@@ -51,7 +53,10 @@ getFiles = () => {
   return HTTP.get("/files");
 };
 
+generatePdf= () =>{
+  return HTTP2.get("/pdf");
 
+}
 
 
 }
